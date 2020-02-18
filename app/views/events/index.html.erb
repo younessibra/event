@@ -1,0 +1,35 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Derniers évènements à Toulouse!</h1>
+    <% if user_signed_in? %>
+      <h1 class="display-6">Bienvenue <%= current_user.email %> ! </h1>
+    <% else %>
+      <h1 class="display-6">Bienvenue ! </h1>
+    <% end %>  
+    <p class="lead">Inscrivez-vous vite et rejoingnez la communauté...</p>
+      <p>Si tu as envie d'en créer un, fonce.</p>
+        <%=link_to "Créer un événement", new_event_path, class: "btn btn-primary btn-lg" %>
+  </div>
+</div>
+
+
+<div class="card-columns border-info container ">
+
+<% Event.all.order(start_date: :asc).each do |event| %>
+    <div class="card border-info text-white bg-info mb-1">
+      <div class="card-header bg-light text-danger">
+        <small>Quand : <%=event.start_date.strftime("%d %m %Y")%></small>
+      </div>
+      <div class="card-body bg-info">
+        <%= link_to event_path(event.id), class:"list-group-item list-group-item-action"  do %>
+        
+          <h5 class="card-title"><%=event.title %></h5><br/>
+          <small>Lieu : <%=event.location%></small>
+
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+</div>
+

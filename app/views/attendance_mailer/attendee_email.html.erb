@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Salut <%= @user.first_name %> !</h1>
+    <p>
+      Tu t'es inscrit sur un event <%= @attendance.event.title %> utilisant l'e-mail suivant : <%= @user.email %>.
+    </p>
+    <p>
+      Je te confirme ta participation et si tu souhaite mettre à jour, va sur : <%= @url %>.
+    </p>
+    <p> À très vite sur monsite.fr !
+  </body>
+</html>

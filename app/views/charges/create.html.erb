@@ -1,0 +1,3 @@
+<h2>Merci, vous avez payé : <strong><%= @amount/100 %>€</strong>! pour votre inscription</h2>
+<% puts @event.inspect%>
+<%= link_to 'Finaliser votre inscription', new_participation_path(id: @event.id), :class => 'btn btn-primary' %>

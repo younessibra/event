@@ -1,0 +1,16 @@
+<h1> index participation </h1>
+
+<%=link_to "Editer l'évènement", edit_event_path(@attendees[0].event_id), class: "btn btn-primary btn-lg" %>
+<%=link_to "Supprimer l'évènement", event_path(@attendees[0].event_id), class: "btn btn-primary btn-lg" %>
+<% @attendees.each do |client| %>
+<div class="card border-info text-white bg-info mb-5">
+    <div class="card-header bg-light text-danger">
+    <small>Participants : <%=client.user.email%></small>
+    </div>
+    <div class="card-body bg-info">
+        <h5 class="card-title"><%=client.user.first_name %></h5>
+        <h5 class="card-title"><%=client.user.last_name %></h5>
+    </div>
+</div>
+  
+<% end %>

@@ -1,0 +1,37 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <p class="lead">Plus d'infos sur l'évènement</p>
+    <h1 class="display-4 text-success"><%=@event.title %></h1>
+  </div>
+</div>
+
+<div class="card-columns border-info container bg-info">
+
+  <p><strong class="text-warning">Titre : </strong>   <%=@event.title %><br/>
+  <strong class="text-warning">Description: </strong> <%=@event.description %><br/>
+  <strong class="text-warning">Date : </strong>       <%=@event.start_date.strftime("%d/%m/%Y") %> à <%=@event.start_date.strftime("%H:%M")%><br/>
+  <strong class="text-warning">Durée : </strong>      <%=@event.duration %> min.<br/>
+  <strong class="text-warning">Fin à : </strong>       <%=@event.end_date.strftime("%H:%M") %><br/>
+  <strong class="text-warning">Lieu : </strong>       <%=@event.location%><br/>
+  <strong class="text-warning">Prix : </strong>       <%=@event.price%> €<br/>
+        Inscrit(s) : <%=@event.users.count%><br/>
+        Event géré par : <%=(@event.manager_id!=nil)?(@event.manager.email):("N/A") %>
+  </p>
+</div>
+<br/><br/>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 offset-md-3">
+    <!-- faire test si user déjà inscrit et mettre bouton pour destroy -->
+      <% if current_user.id == @event.manager_id # user_signed_in? && %>  
+        <%= link_to 'Mon espace événement', edit_event_path(@event), class: "btn btn-warning btn-lg"  %>
+      <% elsif @event.price.to_i != 0%>
+          <!-- inscription payante -->
+          <%=link_to "Rejoindre l'évènement", new_charge_path(id: @event.id), class: "btn btn-primary btn-lg" %>
+        <% else %>
+          <!-- inscription gratuite -->
+          <%=link_to "S'incrire à l'évènement", new_participation_path, class: "btn btn-primary btn-lg" %>
+      <%end%>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Créer un event</h1>
+  </div>
+</div>
+
+<h3>Photo de l'évènement</h3>
+<%if @event.picture.attached?%>
+  <%= image_tag @event.picture, alt: 'photo event' %>
+<%else%>
+  <p>=== Mettre une illustration pour l'évènement après sa création ===</p>
+<%end%>
+
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+
+  <div class="form-group">
+    <%= label_tag(:title, "Titre:") %>
+    <%= text_field_tag(:title,"", :class => 'form-control')%>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag(:description, "Description:") %>
+    <%= text_area_tag(:description,"", :class => 'form-control')%>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag(:location, "Localisation:") %>
+    <%= text_field_tag(:location, "", :class => 'form-control')%>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag(:price, "Prix:") %>
+    <small> (Doit être un compris entre 1 et 1000 euros)</small>
+    <%= text_field_tag(:price, "", :class => 'form-control')%>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag(:start_date, "Début:") %>
+    <%= text_field_tag(:start_date, Time.now+1000 , :class => 'form-control')%>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag(:duration, "Durée:") %>
+    <small> (Durée est multiple de 5 min.)</small>
+    <%= text_field_tag(:duration,"",:class => 'form-control')%>
+  </div>
+
+		<div class="col-sm-12 d-flex justify-content-center  m-3">
+			<%= submit_tag("Créer l'évènement", :class => "btn btn-primary") %>
+		</div>
+
+<% end %>
