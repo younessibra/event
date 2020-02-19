@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+  
   validates :start_date, presence: true 
    
   validates :duration, presence: true
